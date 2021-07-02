@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head>
+<meta charset="utf-8">
+<title>Edit Profile | Ecare</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="">
+<meta name="author" content="">
+<!-- css -->
+<link href="/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet"
+	href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+	integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p"
+	crossorigin="anonymous" />
+<link rel="stylesheet" type="text/css"
+	href="/plugins/cubeportfolio/css/cubeportfolio.min.css">
+<link href="/css/nivo-lightbox.css" rel="stylesheet" />
+<link href="/css/nivo-lightbox-theme/default/default.css"
+	rel="stylesheet" type="text/css" />
+<link href="/css/owl.carousel.css" rel="stylesheet" media="screen" />
+<link href="/css/owl.theme.css" rel="stylesheet" media="screen" />
+<link href="/css/animate.css" rel="stylesheet" />
+<link href="/css/style.css" rel="stylesheet">
+
+<!-- boxed bg -->
+<link id="bodybg" href="/bodybg/bg1.css" rel="stylesheet"
+	type="text/css" />
+<!-- template skin -->
+<link id="t-colors" href="/color/default.css" rel="stylesheet">
+</head>
+
+<body id="page-top" data-spy="scroll" data-target=".navbar-custom">
+
+	<div id="wrapper">
+		<div th:insert="doctor/navbar.html"></div>
+		<section id="intro" class="intro bg-color">
+			<div class="intro-content">
+				<div class="container">
+					<div class="row">
+						<div class="col-lg-9 col-sm-6 col-xs-6">
+							<div role="tabpanel" class="tab-pane active mx-auto"
+								id="overview">
+								<form th:action="@{/update}" enctype="multipart/form-data"
+									method="post" th:object="${dmodel}">
+									<div>
+										<div class="section-heading-wrap">
+											<div class="section-heading">
+												<h2 class="section-heading">Please fill in the Basic
+													information</h2>
+												<span class="sub-heading">Please complete the
+													following basic form. Once you complete modifying the form,
+													you can proceed to completing your profile. </span>
+											</div>
+										</div>
+									</div>
+									<div style="padding-top: 0px; margin-top: 4px;">
+										<h2>Basic Information</h2>
+									</div>
+
+									<div class="tg-box tg-basicinformation">
+										<div class="row ">
+
+											<div class="col-md-12 col-sm-12 col-xs-12 ">
+												<div class="form-group  tg-nmc-number">
+													<label for="DoctorNmcNumber">NMC Number</label><input
+														th:field="*{nmcNumb}" class="form-control"
+														placeholder="NMC Number" step="any" type="number"
+														id="DoctorNmcNumber" />
+												</div>
+											</div>
+
+											<div class="col-md-2 col-sm-12 col-xs-12 ">
+												<div class="form-group ">
+													<label for="DoctorSalutation">Salutation</label> <select
+														th:field="*{salutation}" class="salutation-select"
+														id="DoctorSalutation">
+														<option value="Dr.">Dr.</option>
+														<option value="Asso. Prof.">Asst. Prof.</option>
+														<option value="Prof">Prof</option>
+														<option value="Asst. Prof. Dr.">Asst. Prof. Dr.</option>
+														<option value="Prof. Dr.">Prof. Dr.</option>
+														<option value="Tech">Tech</option>
+														<option value="Acu.">Acu.</option>
+														<option value="Mr.">Mr.</option>
+														<option value="Ms.">Ms.</option>
+														<option value="Pt.">Pt.</option>
+													</select>
+												</div>
+											</div>
+											<div class="col-md-5 col-sm-6 col-xs-12 ">
+												<div class="form-group ">
+													<label for="DoctorFirstname">First Name</label><input
+														th:field="*{firstName}" class="form-control"
+														placeholder="First Name" required="required"
+														maxlength="255" type="text" id="DoctorFirstname" />
+												</div>
+											</div>
+											<div class="col-md-5 col-sm-6 col-xs-12 ">
+												<div class="form-group ">
+													<label for="DoctorLastname">Last Name</label><input
+														th:field="*{lastName}" class="form-control"
+														placeholder="Last Name" required="required"
+														maxlength="255" type="text" id="DoctorLastname" />
+												</div>
+											</div>
+											<div class="col-md-6 col-sm-12 col-xs-12 ">
+												<div class="form-group ">
+													<label for="DoctorEmail">Email</label><input
+														th:field="*{email}" class="form-control"
+														placeholder="Email" required="required" maxlength="255"
+														type="email" id="DoctorEmail" />
+												</div>
+											</div>
+											<div class="col-md-6 col-sm-12 col-xs-12 ">
+												<div class="form-group ">
+													<label for="DoctorPhone">Phone</label><input
+														th:field="*{phone}" class="form-control"
+														placeholder="Phone" required="required" maxlength="255"
+														type="tel" id="DoctorPhone" />
+												</div>
+											</div>
+											<div class="col-md-6 col-sm-12 col-xs-12 ">
+												<div class="form-group ">
+													<label for="DoctorYearsPracticed">Years Practiced</label><input
+														th:field="*{yearsOfPractice}" class="form-control"
+														placeholder="Years of Practice" type="number"
+														id="DoctorYearsPracticed" />
+												</div>
+											</div>
+											<div class="col-md-6 col-sm-12 col-xs-12 ">
+												<div class="form-group ">
+													<label for="DoctorSpeciality">Speciality</label><input
+														th:field="*{speciality}" class="form-control"
+														placeholder="Speciality" required="required"
+														maxlength="255" type="text" id="DoctorSpeciality" />
+												</div>
+											</div>
+											<div class="col-md-6 col-sm-12 col-xs-12 ">
+												<div class="form-group ">
+													<label for="DoctorQualification">Qualification</label><input
+														th:field="*{qualification}" class="form-control"
+														placeholder="Qualification" required="required"
+														maxlength="255" type="text" id="DoctorQualification" />
+												</div>
+											</div>
+
+
+											<div class="col-md-6 col-sm-12 col-xs-12 ">
+												<div class="form-group ">
+													<label for="DoctorGender">Gender</label> <select
+														th:field="*{gender}" class="form-control choose-gender"
+														required="required" id="DoctorGender">
+														<option value="Male">Male</option>
+														<option value="Female">Female</option>
+														<option value="Others">Others</option>
+													</select>
+												</div>
+											</div>
+
+											<div class="col-md-12 col-sm-12 col-xs-12 ">
+												<div class="form-group ">
+													<label for="DoctorDescription">Description</label>
+													<textarea th:field="*{description}"
+														class="form-control ckeditor" placeholder="Your Biography"
+														required="required" cols="30" rows="6"
+														id="DoctorDescription"></textarea>
+												</div>
+											</div>
+											
+										</div>
+									</div>
+										<input type="hidden" th:field="*{info.awards}"> 
+										<input type="hidden" th:field="*{info.experience}"> 
+										<input type="hidden" th:field="*{info.workingPlace}">
+										<input type="hidden" th:field="*{password}">
+										<input type="hidden" th:field="*{status}">
+										
+									<!--
+									<div>
+										<div>
+											<h2>Display Photo</h2>
+										</div>
+										<div class="tg-box tg-profilephoto">
+											<div class="row ">
+												<div class="col-md-12 col-sm-8 col-xs-8 ">
+													<div class="form-group ">
+														<label for="DoctorImage"></label><input type="file"
+															th:field="*{photo}" class="form-control" id="DoctorImage" />
+													</div>
+												</div>
+											</div>
+										</div>
+										 
+										<div >
+											<h2>Medical Council Document (Optional)</h2>
+											<small>For the proof and verification purpose.
+												Mandotary for foreign doctors. </small>
+										</div>
+										<div class="tg-box tg-profilephoto">
+											<div class="row ">
+												<div class="col-md-12 col-sm-8 col-xs-8 ">
+													<div class="form-group ">
+														<label for="DoctorMedicalCouncilDocument"></label><input
+															type="file" th:field="[medical_council_document]"
+															class="form-control" id="DoctorMedicalCouncilDocument" />
+													</div>
+												</div>
+											</div>
+										</div> 
+
+									</div>
+									-->
+																		
+									
+									<div class="tg-updateall mt-5">
+										<span class="tg-note text-secondary mb-4 d-block">*
+											Click <strong>update all changes</strong> to update latest
+											added detail (s).
+										</span>
+
+									</div>
+									<div class="mt-5">
+										<input class="btn btn-primary" type="submit"
+											value="Update">
+									</div>
+									
+									<input type="hidden" th:field="*{id}">
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+	</div>
+	</section>
+	<div th:insert="/doctor/footer.html"></div>
+	</div>
+
+</body>
+</html>

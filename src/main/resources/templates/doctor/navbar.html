@@ -1,0 +1,51 @@
+<nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
+	<div class="top-area">
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-6 col-md-6">
+					<p class="bold text-left">Monday - Saturday, 8am to 10pm</p>
+				</div>
+				<div class="col-sm-6 col-md-6">
+					<p class="bold text-right">Call us now +01 44 45004</p>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="container navigation">
+
+		<div class="navbar-header page-scroll">
+			<button type="button" class="navbar-toggle" data-toggle="collapse"
+				data-target=".navbar-main-collapse">
+				<i class="fa fa-bars"></i>
+			</button>
+			<a class="navbar-brand" th:href="@{/doctor-index}"> <img
+				src="/img/ecare-logo.png" alt="" width="150" height="40" />
+			</a>
+		</div>
+
+		<!-- Collect the nav links, forms, and other content for toggling -->
+		<div
+			class="collapse navbar-collapse navbar-right navbar-main-collapse">
+			<ul class="nav navbar-nav">
+				<li class="active"><a th:href="@{/doctor-index}">Home</a></li>
+				<li><a th:href="@{/doctor-message}">Message</a></li>
+				<li><a th:href="@{/doctor-notice}">Notice</a></li>
+				<li><a th:href="@{/doctor-inquiry}">Inquiry</a></li>
+				<li
+					th:with="todayDate = ${#dates.format(#dates.createNow(),'YYYY-MM-dd')}"><a
+					th:href="@{/doctor-appointments(date=${todayDate})}">Appointments</a></li>
+				<li class="dropdown"><a href="#" class="dropdown-toggle"
+					data-toggle="dropdown"><i class="fas fa-user"></i>
+					<b class="caret"></b></a>
+					<ul class="dropdown-menu">
+						<li><a th:href="@{'/doctor/profile/'+${session.id}}">Profile</a></li>
+						<li><a href="#">Activity</a></li>
+						<li><a href="#">Settings</a></li>
+						<li><a th:href="@{/doctor-logout}">Logout</a></li>
+					</ul></li>
+			</ul>
+		</div>
+		<!-- /.navbar-collapse -->
+	</div>
+	<!-- /.container -->
+</nav>

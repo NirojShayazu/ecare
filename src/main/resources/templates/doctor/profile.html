@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head>
+<meta charset="utf-8">
+<title>Appointments | Ecare</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="">
+<meta name="author" content="">
+<!-- css -->
+<link href="/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet"
+	href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+	integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p"
+	crossorigin="anonymous" />
+<link rel="stylesheet" type="text/css"
+	href="/plugins/cubeportfolio/css/cubeportfolio.min.css">
+<link href="/css/nivo-lightbox.css" rel="stylesheet" />
+<link href="/css/nivo-lightbox-theme/default/default.css"
+	rel="stylesheet" type="text/css" />
+<link href="/css/owl.carousel.css" rel="stylesheet" media="screen" />
+<link href="/css/owl.theme.css" rel="stylesheet" media="screen" />
+<link href="/css/animate.css" rel="stylesheet" />
+<link href="/css/style.css" rel="stylesheet">
+
+<!-- boxed bg -->
+<link id="bodybg" href="/bodybg/bg1.css" rel="stylesheet"
+	type="text/css" />
+<!-- template skin -->
+<link id="t-colors" href="/color/default.css" rel="stylesheet">
+</head>
+
+<body id="page-top" data-spy="scroll" data-target=".navbar-custom">
+
+	<div id="wrapper">
+		<div th:insert="doctor/navbar.html"></div>
+		<section id="intro" class="intro bg-color">
+			<div class="intro-content">
+				<div class="container">
+					<div class="row wow fadeInUp" data-wow-delay="0.2s">
+						<div class="cbp-l-member-img col-lg-3">
+							<img id="preview" th:src="@{'/user-image/'+${dmodel.image}}" alt="Profile picture"
+								class="img-responsive" style="height: 220px; width: auto;">
+							<div style="margin: 9px 13px auto;">
+								<form action="/upload-image" enctype="multipart/form-data"
+									method="post">
+									<input type="hidden" th:field="${dmodel.id}"> <input
+										class="btn btn-skin btn-lg" type="button" id="get_file"
+										value="Change Profile Picture" style="margin-bottom: 7px;">
+									<input type="file" id="chng_file" name="image" accept="image/*">
+									<input id="save" type="submit" class="btn btn-skin btn-lg"
+										value="save" style="display: none; visibility: visible;">
+								</form>
+							</div>
+						</div>
+						<div class="cbp-l-member-info col-lg-4">
+							<p class="cbp-l-grid-team-name"
+								th:text="*{dmodel.firstName+' '+dmodel.lastName}"></p>
+							<p class="cbp-l-grid-team-position"
+								th:text="*{dmodel.speciality}"></p>
+							<b><p th:text="*{dmodel.qualification}"></p></b> <b><p
+									th:text="'NMC Number: '+*{dmodel.nmcNumb}"></p></b> <b><p
+									th:text="'Years of practice: '+*{dmodel.yearsOfPractice}"></p>
+							</b>
+						</div>
+						<div class="col-lg-3">
+							<div class="wow lightSpeedIn" data-wow-delay="0.1s">
+								<div class="cta-btn">
+									<a th:href="@{'/doctor/edit-profile/'+${dmodel.id}}"
+										class="btn btn-skin btn-lg">Edit Profile</a>
+								</div>
+								<div class="cta-btn">
+									<a href="#" data-target="#pwdModal" data-toggle="modal"
+										class="btn btn-skin btn-lg">Change Password</a>
+								</div>
+							</div>
+						</div>
+
+					</div>
+					<div class="row"></div>
+
+				</div>
+
+				<!--modal-->
+				<div id="pwdModal" class="modal fade" tabindex="-1" role="dialog"
+					aria-hidden="true">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal"
+									aria-hidden="true">×</button>
+								<h3 class="text-center">Change Password</h3>
+							</div>
+							<div class="modal-body">
+								<div class="col-md-12">
+									<div class="panel panel-default">
+										<div class="panel-body">
+											<div class="text-center">
+												<div class="panel-body">
+													<fieldset>
+														<form id="change-password" action="/change-password"
+															method="post">
+															<div class="form-group">
+																<div class="col">
+																	<input class="form-control input-lg"
+																		placeholder="Current Password" name="oldpass"
+																		type="password" id="currentpass" required>
+
+																</div>
+																<div id="msgDiv"></div>
+
+															</div>
+															<div class="form-group">
+																<div class="col">
+																	<input class="form-control input-lg"
+																		placeholder="New Password" name="password"
+																		type="password" id="psw" required>
+																</div>
+																<div id="rule" class='alert alert-danger'>
+																	<strong>Password Rules!</strong>
+																	<p>a digit must occur at least once</p>
+																	<p>a lower case alphabet must occur at least once</p>
+																	<p>an upper case alphabet that must occur at least
+																		once</p>
+																	<p>a special character that must occur at least
+																		once</p>
+																	<p>white spaces aren’t allowed</p>
+																	<p>8-20 character in length</p>
+
+																</div>
+															</div>
+															<div class="form-group">
+																<div class="col">
+																	<input class="form-control input-lg"
+																		placeholder="Retype new Password" name="repassword"
+																		type="password" id="rePsw" required>
+																</div>
+																<div id="chkPsw"></div>
+															</div>
+
+															<div class="col-md-6">
+																<input class="btn btn-primary btn-block" value="Cancel"
+																	type="button" data-dismiss="modal" aria-hidden="true">
+															</div>
+															<div class="col-md-6">
+																<input class="btn btn-primary btn-block"
+																	value="Save Changes" type="submit" id="save">
+															</div>
+
+															<input type="hidden" th:value="${session.id}" name="id"
+																id="id">
+														</form>
+													</fieldset>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="modal-footer">
+								<div class="col-md-12"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</section>
+		<div th:insert="/doctor/footer.html"></div>
+		<script>
+			document.getElementById('get_file').onclick = function() {
+				document.getElementById('chng_file').click();
+			};
+
+			function readURL(input) {
+				if (input.files && input.files[0]) {
+					var reader = new FileReader();
+					reader.onload = function(e) {
+						$('#preview').attr('src', e.target.result);
+					}
+					reader.readAsDataURL(input.files[0]);
+				} else {
+					alert('select a file to see preview');
+					$('#preview').attr('src', '');
+				}
+			}
+
+			$("#chng_file").change(function() {
+				readURL(this);
+				$("#save").show();
+			});
+
+			$("#currentpass").keyup(function() {
+				$.ajax({
+					url : "/check-currentpassword",
+					type : "POST", //send it through get method
+					data : {
+						password : $("#currentpass").val(),
+						id : $("#id").val()
+					},
+					success : function(response) {
+						$("#msgDiv").append("<p id='msg'></p>");
+						if (response == true) {
+							$("#msg").remove();
+							$(':input[type="submit"]').prop('disabled', false);
+						} else {
+							msg = 'Incorrect Password';
+							$("#msg").text(msg).addClass("alert alert-danger");
+							$(':input[type="submit"]').prop('disabled', true);
+						}
+
+					},
+					error : function(xhr) {
+						//Do Something to handle error
+					}
+				});
+
+			});
+
+			$("#psw").change(function() {
+				$.ajax({
+					url : "/validate-password",
+					type : "POST", //send it through get method
+					data : {
+						password : $("#psw").val()
+					},
+					success : function(response) {
+						if (response == true) {
+							$("#rule").hide();
+
+						}
+					}
+				});
+			});
+
+			$("#rePsw").keyup(function() {
+				$.ajax({
+					url : "/match-password",
+					type : "POST", //send it through get method
+					data : {
+						password : $("#psw").val(),
+						repassword : $("#rePsw").val()
+					},
+					success : function(response) {
+						$("#chkPsw").append("<p id='chk'></p>");
+						if (response == true) {
+							$("#chk").remove();
+							$(':input[type="submit"]').prop('disabled', false);
+						} else {
+							msg = 'Password Not Matched';
+							$("#chk").text(msg).addClass("alert alert-danger");
+							$(':input[type="submit"]').prop('disabled', true);
+						}
+					}
+				});
+			});
+		</script>
+	</div>
+
+</body>
+</html>

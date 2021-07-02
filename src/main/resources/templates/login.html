@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head>
+<meta charset="utf-8">
+<title>Login | Ecare</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="">
+<meta name="author" content="">
+<!-- css -->
+<link href="/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+<link href="font-awesome/css/font-awesome.min.css" rel="stylesheet"
+	type="text/css" />
+<link rel="stylesheet" type="text/css"
+	href="plugins/cubeportfolio/css/cubeportfolio.min.css">
+<link href="css/nivo-lightbox.css" rel="stylesheet" />
+<link href="css/nivo-lightbox-theme/default/default.css"
+	rel="stylesheet" type="text/css" />
+<link href="css/owl.carousel.css" rel="stylesheet" media="screen" />
+<link href="css/owl.theme.css" rel="stylesheet" media="screen" />
+<link href="css/animate.css" rel="stylesheet" />
+<link href="css/style.css" rel="stylesheet">
+<link href="css/custom.css" rel="stylesheet">
+
+<!-- boxed bg -->
+<link id="bodybg" href="bodybg/bg1.css" rel="stylesheet" type="text/css" />
+<!-- template skin -->
+<link id="t-colors" href="color/default.css" rel="stylesheet">
+<body id="page-top" data-spy="scroll" data-target=".navbar-custom">
+
+	<div id="wrapper">
+		<div th:insert="navbar.html"></div>
+		<section id="intro" class="intro">
+			<div class="intro-content">
+				<div class="container">
+					<div class="row">
+						<div class="col-lg-7">
+							<div class="wow fadeInDown" data-wow-offset="0"
+								data-wow-delay="0.1s">
+								<h2 class="h-ultra">Log In</h2>
+							</div>
+							<div class="wow fadeInUp" data-wow-offset="0"
+								data-wow-delay="0.1s">
+								<h4 class="h-light">Select your login method from the
+									following:</h4>
+							</div>
+							<div class="well well-trans">
+								<div class="wow fadeInRight" data-wow-delay="0.1s">
+									<button class="btn btn-skin" id="toggle-doctor">As Doctor</button>
+									<button	class="btn btn-skin" id="toggle-admin">As Admin</button>
+								</div>
+							</div>
+						</div>
+						<div class="col-lg-5" id="doctor">
+							<div class="form-wrapper">
+								<div class="wow fadeInRight" data-wow-duration="2s"
+									data-wow-delay="0.2s">
+
+									<div class="panel panel-skin">
+										<div class="panel-heading">
+											<h3 class="panel-title">
+												<span class="fa fa-pencil-square-o"></span> Login
+											</h3>
+										</div>
+										<div class="panel-body">
+										<p style="color: red" th:text="${msg}"></p>
+											<form role="form" class="lead" action="/doctor/login" method="Post">
+												<div class="form-group">
+													<label>Phone/Email Address</label> <input type="text"
+														name="email" id="email" class="form-control input-md" required>
+												</div>
+												<div class="form-group">
+													<label>Password</label> <input type="password"
+														name="password" id="password"
+														class="form-control input-md" required>
+												</div>
+												<input type="submit" value="Log in"
+													class="btn btn-skin btn-block btn-lg">
+
+											</form>
+											<div class="form-inline form-group ">
+												<Label>Register as a Doctor?</Label>
+												<a th:href="@{/signup}"><button type="button"
+														class="btn btn-skin btn-lg" style="background-color:green; float:right;">Sign up</button></a>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-lg-5" id="admin">
+							<div class="form-wrapper">
+								<div class="wow fadeInRight" data-wow-duration="2s"
+									data-wow-delay="0.2s">
+
+									<div class="panel panel-skin">
+										<div class="panel-heading">
+											<h3 class="panel-title">
+												<span class="fa fa-pencil-square-o"></span> Login
+											</h3>
+										</div>
+										<div class="panel-body">
+										<p style="color: red" th:text="${msg}"></p>
+											<form role="form" class="lead" action="/admin" method="post">
+												<div class="form-group">
+													<label>Username</label> <input type="text"
+														name="username" id="username" class="form-control input-md" required>
+												</div>
+												<div class="form-group">
+													<label>Password</label> <input type="password"
+														name="password" id="password"
+														class="form-control input-md" required>
+												</div>
+												<input type="submit" value="Log in"
+													class="btn btn-skin btn-block btn-lg">
+
+											</form>
+
+										</div>
+									</div>
+
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<div th:insert="footer.html"></div>
+		<script>
+			$("document").ready(function() {
+				$("#toggle-doctor").attr("disabled", true);
+				$("#admin").hide();
+			});
+
+			$("#toggle-doctor").click(function() {
+				$("#toggle-doctor").attr("disabled", true);
+				$("#admin").hide();
+				$("#doctor").toggle();
+				$("#toggle-admin").removeAttr("disabled");
+				
+			});
+
+			$("#toggle-admin").click(function() {
+				$("#toggle-admin").attr("disabled", true);
+				$("#doctor").hide();
+				$("#admin").toggle();
+				$("#toggle-doctor").removeAttr("disabled");
+				
+			});
+		</script>
+
+	</div>
+
+</body>
+</html>

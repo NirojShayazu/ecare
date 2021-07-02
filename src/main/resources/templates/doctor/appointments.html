@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head>
+<meta charset="utf-8">
+<title>Appointments | Ecare</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="">
+<meta name="author" content="">
+<!-- css -->
+<link href="../css/bootstrap.min.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet"
+	href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+	integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p"
+	crossorigin="anonymous" />
+<link rel="stylesheet" type="text/css"
+	href="../plugins/cubeportfolio/css/cubeportfolio.min.css">
+<link href="../css/nivo-lightbox.css" rel="stylesheet" />
+<link href="../css/nivo-lightbox-theme/default/default.css"
+	rel="stylesheet" type="text/css" />
+<link href="../css/owl.carousel.css" rel="stylesheet" media="screen" />
+<link href="../css/owl.theme.css" rel="stylesheet" media="screen" />
+<link href="../css/animate.css" rel="stylesheet" />
+<link href="../css/style.css" rel="stylesheet">
+
+<!-- boxed bg -->
+<link id="bodybg" href="../bodybg/bg1.css" rel="stylesheet"
+	type="text/css" />
+<!-- template skin -->
+<link id="t-colors" href="../color/default.css" rel="stylesheet">
+</head>
+
+<body id="page-top" data-spy="scroll" data-target=".navbar-custom">
+
+	<div id="wrapper">
+		<div th:insert="doctor/navbar.html"></div>
+		<section id="intro" class="intro bg-color">
+			<div class="intro-content">
+				<div class="container">
+					<h3>
+						<i class="far fa-calendar-check"></i> Appointment List
+					</h3>
+					<div class="row">
+						<div class="col-sm-4"></div>
+						<div class="col-sm-8">
+							<!--	<div class="dropdown float-right">
+								<button class="btn btn-primary dropdown-toggle" type="button"
+									data-toggle="dropdown">
+									Days <span class="caret"></span>
+								</button>
+								<ul class="dropdown-menu">
+									<li><a class="dropdown-item" href="#">Yesterday</a></li>
+									<li><a class="dropdown-item" href="#">Today</a></li>
+									<li><a class="dropdown-item" href="#">Tomorrow</a></li>
+								</ul>
+							</div> -->
+							<b>Search by Date: </b><input type="date" id="date" />
+						</div>
+					</div>
+					<div class="table-responsive table-hover">
+						<table class="table table-hover" id="dataTable" width="100%"
+							cellspacing="0">
+							<thead class="thead-dark">
+								<tr>
+									<th scope="col">#</th>
+									<th>Full Name</th>
+									<th>Gender</th>
+									<th>Age</th>
+									<th>Time</th>
+									<th>Date</th>
+									<th>Status</th>
+									<th>Action</th>
+
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:each="p : ${appointments}">
+									<th scope="row" th:text="${p.id}"></th>
+									<td th:text="${p.fullname}"></td>
+									<td th:text="${p.gender}"></td>
+									<td th:text="${p.age}"></td>
+									<td th:text="${p.atime}"></td>
+									<td th:text="${p.adate}"></td>
+									<td th:text="${p.status}"></td>
+									<td>
+										<div>
+											<a class="btn"
+												th:href="@{'/doctor/checked/'+${p.id}+'&'+${p.adate}}"
+												data-toggle="tooltip" title="Checked"> <i
+												class="fas fa-check"></i><span> Checked</span></a> <a
+												class="btn"
+												th:href="@{'/doctor/recheck/'+${p.id}+'&'+${p.adate}}"
+												data-toggle="tooltip" title="Undo Task"> <i
+												class="fas fa-undo"></i></a> <a class="btn"
+												th:href="@{'/doctor/reports/'+${p.id}+'&'+${p.adate}}"
+												data-toggle="tooltip" title="See Reports"> <i
+												class="fas fa-info"></i></a>
+
+										</div>
+
+									</td>
+								</tr>
+
+							</tbody>
+						</table>
+					</div>
+
+
+				</div>
+
+			</div>
+		</section>
+		<div th:insert="/doctor/footer.html"></div>
+		<script>
+			$('#date').on(
+					"change",
+					function() {
+						location.href = "/doctor-appointments?date="
+								+ $('#date').val();
+					});
+		</script>
+	</div>
+
+</body>
+</html>
